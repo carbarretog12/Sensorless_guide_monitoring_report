@@ -39,10 +39,13 @@
             background: white;
             border: 1px solid #dadce0;
             border-radius: 8px;
-            padding: 24px;
+            padding: 16px;
             margin-bottom: 12px;
             box-shadow: 0 1px 2px 0 rgba(60,64,67,0.3), 0 1px 3px 1px rgba(60,64,67,0.15);
             transition: all 0.3s ease;
+        }
+        @media (min-width: 768px) {
+            .g-form-card { padding: 24px; }
         }
         .g-form-card.active {
             border-left: 4px solid #143d78;
@@ -85,7 +88,7 @@
         }
     </style>
 </head>
-<body class="h-screen flex flex-col font-sans overflow-hidden">
+<body class="h-[100dvh] flex flex-col font-sans overflow-hidden">
 
     <!-- STREAMING_CHUNK:Construyendo el encabezado con los logos corporativos... -->
     <header class="bg-white shadow-sm z-10 p-4 shrink-0 flex justify-center border-b-4 border-brand-blue">
@@ -108,8 +111,8 @@
     <main id="view-guide" class="flex-1 flex flex-col lg:flex-row overflow-hidden relative">
         
         <!-- Panel Izquierdo: Instrucciones (Wizard) -->
-        <div class="w-full lg:w-1/3 bg-white shadow-lg z-20 flex flex-col h-full border-r border-gray-200">
-            <div class="p-6 md:p-8 flex-1 overflow-y-auto">
+        <div class="w-full lg:w-1/3 bg-white shadow-lg z-20 flex flex-col flex-1 lg:flex-none lg:h-full border-b lg:border-b-0 lg:border-r border-gray-200 min-h-0">
+            <div class="p-4 md:p-8 flex-1 overflow-y-auto min-h-0">
                 <div class="mb-2 text-sm font-semibold text-brand-blue uppercase tracking-wider">Tutorial Interactivo</div>
                 <h1 class="text-2xl font-bold text-gray-800 mb-4 font-google">Guía de Registro de Intervenciones</h1>
                 
@@ -130,13 +133,13 @@
                 </div>
 
                 <!-- Contenido Dinámico de Instrucciones -->
-                <div id="instruction-content" class="fade-in min-h-[300px]">
+                <div id="instruction-content" class="fade-in min-h-[200px]">
                     <!-- Se llena con JS -->
                 </div>
             </div>
 
             <!-- Botones de Navegación -->
-            <div class="p-6 border-t border-gray-100 flex justify-between bg-gray-50 shrink-0">
+            <div class="p-4 md:p-6 border-t border-gray-100 flex justify-between bg-gray-50 shrink-0">
                 <button id="btn-prev" class="px-5 py-2.5 rounded-md text-gray-600 font-medium hover:bg-gray-200 transition-colors disabled:opacity-50 disabled:cursor-not-allowed">
                     <i class="fa-solid fa-arrow-left mr-2"></i> Anterior
                 </button>
@@ -147,7 +150,7 @@
         </div>
 
         <!-- Panel Derecho: Simulación del Formulario -->
-        <div class="w-full lg:w-2/3 bg-[#f0ebf8] overflow-y-auto p-4 md:p-10 relative">
+        <div class="w-full lg:w-2/3 bg-[#f0ebf8] overflow-y-auto p-4 md:p-10 relative flex-1 lg:flex-none lg:h-full min-h-0">
             <div class="max-w-3xl mx-auto pb-20" id="form-container">
                 
                 <!-- Encabezado del Formulario Falso -->
