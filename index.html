@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Guía de Registro - BCPGroup</title>
-    <!-- STREAMING_CHUNK:Cargando librerías y configurando Tailwind CSS... -->
+    <!-- Cargando librerías y configurando Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Google+Sans:wght@400;500&display=swap" rel="stylesheet">
@@ -90,9 +90,8 @@
 </head>
 <body class="h-[100dvh] flex flex-col font-sans overflow-hidden">
 
-    <!-- STREAMING_CHUNK:Construyendo el encabezado con los logos corporativos... -->
+    <!-- Encabezado con los logos corporativos desde Drive -->
     <header class="bg-white shadow-sm z-10 p-4 shrink-0 flex justify-center border-b-4 border-brand-blue">
-        <!-- AQUÍ ESTÁ LA CORRECCIÓN DE LA IMAGEN DESDE DRIVE -->
         <img src="https://lh3.googleusercontent.com/d/1lcKYrw4b1z-jcOICVwaSmwgGTMWEVRjm" alt="Logos Corporativos BCPGroup" class="h-16 md:h-20 object-contain" crossorigin="anonymous" referrerpolicy="no-referrer">
     </header>
 
@@ -106,7 +105,6 @@
         </button>
     </div>
 
-    <!-- STREAMING_CHUNK:Diseñando la estructura principal dividida (Instrucciones | Simulación)... -->
     <!-- Contenedor Principal de la Guía -->
     <main id="view-guide" class="flex-1 flex flex-col lg:flex-row overflow-hidden relative">
         
@@ -324,7 +322,7 @@
                         <div class="mb-4 text-[16px] text-gray-800 font-google">Actividad reportada por <span class="text-red-600">*</span></div>
                         <select class="g-select text-gray-700 cursor-pointer">
                             <option value="">Elige</option>
-                            <option value="usuario1">Ingeniero A</option>
+                            <option value="usuario1" selected>Ingeniero A</option>
                             <option value="usuario2">Operador B</option>
                         </select>
                     </div>
@@ -362,7 +360,7 @@
                         <h4 class="font-bold text-gray-800 mb-4 font-google text-lg border-b pb-2">Sensor de fondo</h4>
                         <div class="mb-4">
                             <label class="block text-[16px] text-gray-800 font-google mb-2">PIP [psi]</label>
-                            <input type="text" class="g-input" placeholder="Tu respuesta">
+                            <input type="text" class="g-input" placeholder="Tu respuesta" value="352.4">
                         </div>
                     </div>
 
@@ -372,19 +370,19 @@
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div>
                                 <label class="block text-[16px] text-gray-800 font-google mb-2">PIP SL [psi]</label>
-                                <input type="text" class="g-input" placeholder="Tu respuesta">
+                                <input type="text" class="g-input" placeholder="Tu respuesta" value="350.0">
                             </div>
                             <div>
                                 <label class="block text-[16px] text-gray-800 font-google mb-2">PWF SL [psi]</label>
-                                <input type="text" class="g-input" placeholder="Tu respuesta">
+                                <input type="text" class="g-input" placeholder="Tu respuesta" value="455.2">
                             </div>
                             <div>
                                 <label class="block text-[16px] text-gray-800 font-google mb-2">Sumergencia SL [ft]</label>
-                                <input type="text" class="g-input" placeholder="Tu respuesta">
+                                <input type="text" class="g-input" placeholder="Tu respuesta" value="850.5">
                             </div>
                             <div>
                                 <label class="block text-[16px] text-gray-800 font-google mb-2">NFD SL [ft]</label>
-                                <input type="text" class="g-input" placeholder="Tu respuesta">
+                                <input type="text" class="g-input" placeholder="Tu respuesta" value="4200.0">
                             </div>
                         </div>
                     </div>
@@ -398,11 +396,19 @@
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                              <div>
                                 <label class="block text-[16px] text-gray-800 font-google mb-2">PIP Echom [psi]</label>
-                                <input type="text" class="g-input" placeholder="Tu respuesta">
+                                <input type="text" class="g-input" placeholder="Tu respuesta" value="348.0">
                             </div>
                             <div>
                                 <label class="block text-[16px] text-gray-800 font-google mb-2">PWF Echom [psi]</label>
-                                <input type="text" class="g-input" placeholder="Tu respuesta">
+                                <input type="text" class="g-input" placeholder="Tu respuesta" value="460.0">
+                            </div>
+                            <div>
+                                <label class="block text-[16px] text-gray-800 font-google mb-2">Sumergencia Echom [ft]</label>
+                                <input type="text" class="g-input" placeholder="Tu respuesta" value="845.0">
+                            </div>
+                            <div>
+                                <label class="block text-[16px] text-gray-800 font-google mb-2">NFD Echom [ft]</label>
+                                <input type="text" class="g-input" placeholder="Tu respuesta" value="4205.0">
                             </div>
                         </div>
                     </div>
@@ -448,7 +454,9 @@
                 mockSubmitArea.classList.add('hidden');
             }
 
-            document.querySelector('.w-full.lg\\:w-2\\/3').scrollTo({ top: 0, behavior: 'smooth' });
+            // Scroll suave
+            const rightPanel = document.querySelector('.lg\\:w-2\\/3');
+            if (rightPanel) rightPanel.scrollTo({ top: 0, behavior: 'smooth' });
 
             btnPrev.disabled = stepIndex === 0;
             
@@ -496,29 +504,23 @@
         const viewReports = document.getElementById('view-reports');
 
         tabGuide.addEventListener('click', () => {
-            // Estilos de la pestaña activa
             tabGuide.classList.replace('border-transparent', 'border-brand-blue');
             tabGuide.classList.replace('text-gray-500', 'text-brand-blue');
             
-            // Estilos de la pestaña inactiva
             tabReports.classList.replace('border-brand-blue', 'border-transparent');
             tabReports.classList.replace('text-brand-blue', 'text-gray-500');
             
-            // Mostrar vista de Guía
             viewGuide.classList.remove('hidden');
             viewReports.classList.add('hidden');
         });
 
         tabReports.addEventListener('click', () => {
-            // Estilos de la pestaña activa
             tabReports.classList.replace('border-transparent', 'border-brand-blue');
             tabReports.classList.replace('text-gray-500', 'text-brand-blue');
             
-            // Estilos de la pestaña inactiva
             tabGuide.classList.replace('border-brand-blue', 'border-transparent');
             tabGuide.classList.replace('text-brand-blue', 'text-gray-500');
             
-            // Mostrar vista de Reportes
             viewReports.classList.remove('hidden');
             viewGuide.classList.add('hidden');
         });
