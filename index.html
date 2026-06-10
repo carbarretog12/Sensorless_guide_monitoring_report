@@ -93,8 +93,19 @@
         <img src="https://lh3.googleusercontent.com/d/1lcKYrw4b1z-jcOICVwaSmwgGTMWEVRjm" alt="Logos Corporativos BCPGroup" class="h-16 md:h-20 object-contain" crossorigin="anonymous" referrerpolicy="no-referrer">
     </header>
 
+    <!-- Navegación de Pestañas -->
+    <div class="bg-white border-b border-gray-200 px-4 flex justify-center space-x-8 shrink-0 relative z-10 shadow-sm">
+        <button id="tab-guide" class="py-3 px-2 border-b-2 border-brand-blue text-brand-blue font-medium text-sm md:text-base transition-colors flex items-center">
+            <i class="fa-solid fa-list-check mr-2"></i> Guía de Registro
+        </button>
+        <button id="tab-reports" class="py-3 px-2 border-b-2 border-transparent text-gray-500 hover:text-gray-800 font-medium text-sm md:text-base transition-colors flex items-center">
+            <i class="fa-solid fa-chart-pie mr-2"></i> Reportes y Estado
+        </button>
+    </div>
+
     <!-- STREAMING_CHUNK:Diseñando la estructura principal dividida (Instrucciones | Simulación)... -->
-    <main class="flex-1 flex flex-col lg:flex-row overflow-hidden relative">
+    <!-- Contenedor Principal de la Guía -->
+    <main id="view-guide" class="flex-1 flex flex-col lg:flex-row overflow-hidden relative">
         
         <!-- Panel Izquierdo: Instrucciones (Wizard) -->
         <div class="w-full lg:w-1/3 bg-white shadow-lg z-20 flex flex-col h-full border-r border-gray-200">
@@ -104,7 +115,7 @@
                 
                 <!-- Botón de acceso al formulario real -->
                 <a href="https://docs.google.com/forms/d/e/1FAIpQLScC6Jyl6S8IherkxOsIhUA2aVi9oarKhV6rmPXliMcol6QxHw/viewform" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center w-full mb-8 px-4 py-2 bg-brand-light text-brand-blue font-medium rounded-md hover:bg-blue-100 transition-colors border border-blue-200 shadow-sm">
-                    <i class="fa-solid fa-arrow-up-right-from-square mr-2"></i> Abrir Formulario Sensorless
+                    <i class="fa-solid fa-arrow-up-right-from-square mr-2"></i> Abrir Formulario Oficial
                 </a>
                 
                 <!-- Progreso -->
@@ -169,6 +180,42 @@
                     <button class="text-gray-500 font-medium hover:bg-gray-100 px-4 py-2 rounded transition-colors">Borrar formulario</button>
                 </div>
             </div>
+        </div>
+    </main>
+
+    <!-- Contenedor de Reportes (Oculto por defecto) -->
+    <main id="view-reports" class="hidden flex-1 flex-col overflow-y-auto bg-gray-100 p-4 md:p-8">
+        <div class="max-w-7xl mx-auto w-full space-y-6">
+            
+            <!-- Encabezado de Reportes y Enlace Externo -->
+            <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200 flex flex-col md:flex-row justify-between items-center gap-4">
+                <div>
+                    <h2 class="text-2xl font-bold text-gray-800 font-google">Reporte de Estado y Monitoreo</h2>
+                    <p class="text-gray-600 mt-1">Visualización de datos de implementaciones Sensorless BCPGroup</p>
+                </div>
+                <a href="https://sites.google.com/view/novacubeprojetc/reportes-autom%C3%A1ticos/sensorlessiprgraph-estado?authuser=0" target="_blank" rel="noopener noreferrer" class="shrink-0 bg-white border-2 border-brand-blue text-brand-blue hover:bg-brand-light px-6 py-3 rounded-md font-medium transition-colors shadow-sm flex items-center">
+                    <i class="fa-solid fa-arrow-up-right-from-square mr-2"></i> Portal NovaCube
+                </a>
+            </div>
+
+            <!-- Iframe de Data Studio / Looker Studio -->
+            <div class="bg-white p-2 rounded-lg shadow-sm border border-gray-200 h-[600px] lg:h-[800px] w-full relative">
+                <div class="absolute inset-0 flex items-center justify-center bg-gray-50 -z-10 rounded">
+                    <div class="text-gray-400 flex flex-col items-center">
+                        <i class="fa-solid fa-spinner fa-spin text-3xl mb-2"></i>
+                        <span>Cargando reporte...</span>
+                    </div>
+                </div>
+                <iframe 
+                    src="https://datastudio.google.com/embed/reporting/a9e7b7ff-329b-4c2a-988f-6d6cb19fc4be/page/QX5MF" 
+                    frameborder="0" 
+                    style="border:0" 
+                    allowfullscreen 
+                    sandbox="allow-storage-access-by-user-activation allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox"
+                    class="w-full h-full rounded">
+                </iframe>
+            </div>
+            
         </div>
     </main>
 
@@ -438,6 +485,40 @@
         });
 
         renderStep(currentStep);
+
+        // Lógica de Pestañas (Tabs)
+        const tabGuide = document.getElementById('tab-guide');
+        const tabReports = document.getElementById('tab-reports');
+        const viewGuide = document.getElementById('view-guide');
+        const viewReports = document.getElementById('view-reports');
+
+        tabGuide.addEventListener('click', () => {
+            // Estilos de la pestaña activa
+            tabGuide.classList.replace('border-transparent', 'border-brand-blue');
+            tabGuide.classList.replace('text-gray-500', 'text-brand-blue');
+            
+            // Estilos de la pestaña inactiva
+            tabReports.classList.replace('border-brand-blue', 'border-transparent');
+            tabReports.classList.replace('text-brand-blue', 'text-gray-500');
+            
+            // Mostrar vista de Guía
+            viewGuide.classList.remove('hidden');
+            viewReports.classList.add('hidden');
+        });
+
+        tabReports.addEventListener('click', () => {
+            // Estilos de la pestaña activa
+            tabReports.classList.replace('border-transparent', 'border-brand-blue');
+            tabReports.classList.replace('text-gray-500', 'text-brand-blue');
+            
+            // Estilos de la pestaña inactiva
+            tabGuide.classList.replace('border-brand-blue', 'border-transparent');
+            tabGuide.classList.replace('text-brand-blue', 'text-gray-500');
+            
+            // Mostrar vista de Reportes
+            viewReports.classList.remove('hidden');
+            viewGuide.classList.add('hidden');
+        });
 
     </script>
 </body>
