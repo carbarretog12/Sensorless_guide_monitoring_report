@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guía de Registro - BCPGroup</title>
+    <!-- STREAMING_CHUNK:Cargando librerías y configurando Tailwind CSS... -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Google+Sans:wght@400;500&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        google: ['"Google Sans"', 'Roboto', 'Arial', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            blue: '#143d78',
+                            light: '#e0e7ff',
+                        },
+                        form: {
+                            bg: '#f0ebf8',
+                            border: '#dadce0',
+                            purple: '#673ab7',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { background-color: #f3f4f6; }
+        
+        /* Estilos simulados de Google Forms */
+        .g-form-card {
+            background: white;
+            border: 1px solid #dadce0;
+            border-radius: 8px;
+            padding: 24px;
+            margin-bottom: 12px;
+            box-shadow: 0 1px 2px 0 rgba(60,64,67,0.3), 0 1px 3px 1px rgba(60,64,67,0.15);
+            transition: all 0.3s ease;
+        }
+        .g-form-card.active {
+            border-left: 4px solid #143d78;
+        }
+        .g-form-header-card {
+            border-top: 8px solid #143d78; 
+            border-radius: 8px;
+        }
+        .g-input {
+            border: none;
+            border-bottom: 1px solid #dadce0;
+            width: 100%;
+            padding: 8px 0;
+            font-size: 14px;
+            transition: border-bottom-color 0.2s;
+            outline: none;
+        }
+        .g-input:focus {
+            border-bottom: 2px solid #143d78;
+        }
+        .g-select {
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%235f6368'%3e%3cpath d='M7 10l5 5 5-5z'/%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 8px center;
+            background-size: 24px;
+            border: 1px solid #dadce0;
+            border-radius: 4px;
+            padding: 12px 36px 12px 12px;
+            width: 50%;
+            outline: none;
+        }
+        .g-select:focus { border: 2px solid #143d78; padding: 11px 35px 11px 11px;}
+        
+        /* Animaciones para transiciones suaves */
+        .fade-in { animation: fadeIn 0.4s ease-in-out; }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="h-screen flex flex-col font-sans overflow-hidden">
+
+    <!-- STREAMING_CHUNK:Construyendo el encabezado con los logos corporativos... -->
+    <header class="bg-white shadow-sm z-10 p-4 shrink-0 flex justify-center border-b-4 border-brand-blue">
+        <!-- AQUÍ ESTÁ LA CORRECCIÓN DE LA IMAGEN DESDE DRIVE -->
+        <img src="https://lh3.googleusercontent.com/d/1lcKYrw4b1z-jcOICVwaSmwgGTMWEVRjm" alt="Logos Corporativos BCPGroup" class="h-16 md:h-20 object-contain" crossorigin="anonymous" referrerpolicy="no-referrer">
+    </header>
+
+    <!-- STREAMING_CHUNK:Diseñando la estructura principal dividida (Instrucciones | Simulación)... -->
+    <main class="flex-1 flex flex-col lg:flex-row overflow-hidden relative">
+        
+        <!-- Panel Izquierdo: Instrucciones (Wizard) -->
+        <div class="w-full lg:w-1/3 bg-white shadow-lg z-20 flex flex-col h-full border-r border-gray-200">
+            <div class="p-6 md:p-8 flex-1 overflow-y-auto">
+                <div class="mb-2 text-sm font-semibold text-brand-blue uppercase tracking-wider">Tutorial Interactivo</div>
+                <h1 class="text-2xl font-bold text-gray-800 mb-6 font-google">Guía de Registro de Intervenciones</h1>
+                
+                <!-- Progreso -->
+                <div class="mb-8">
+                    <div class="flex justify-between text-xs text-gray-500 mb-2">
+                        <span id="step-counter">Paso 1 de 4</span>
+                        <span id="step-percentage">25%</span>
+                    </div>
+                    <div class="w-full bg-gray-200 rounded-full h-2">
+                        <div id="progress-bar" class="bg-brand-blue h-2 rounded-full transition-all duration-500 w-1/4"></div>
+                    </div>
+                </div>
+
+                <!-- Contenido Dinámico de Instrucciones -->
+                <div id="instruction-content" class="fade-in min-h-[300px]">
+                    <!-- Se llena con JS -->
+                </div>
+            </div>
+
+            <!-- Botones de Navegación -->
+            <div class="p-6 border-t border-gray-100 flex justify-between bg-gray-50 shrink-0">
+                <button id="btn-prev" class="px-5 py-2.5 rounded-md text-gray-600 font-medium hover:bg-gray-200 transition-colors disabled:opacity-50 disabled:cursor-not-allowed">
+                    <i class="fa-solid fa-arrow-left mr-2"></i> Anterior
+                </button>
+                <button id="btn-next" class="px-5 py-2.5 rounded-md bg-brand-blue text-white font-medium hover:bg-blue-800 transition-colors shadow-md flex items-center">
+                    Siguiente <i class="fa-solid fa-arrow-right ml-2"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Panel Derecho: Simulación del Formulario -->
+        <div class="w-full lg:w-2/3 bg-[#f0ebf8] overflow-y-auto p-4 md:p-10 relative">
+            <div class="max-w-3xl mx-auto pb-20" id="form-container">
+                
+                <!-- Encabezado del Formulario Falso -->
+                <div class="g-form-card g-form-header-card mb-4" id="mock-header">
+                    <h2 class="text-[32px] font-google text-gray-800 mb-2">Registro de intervenciones Sensorless BCPGroup</h2>
+                    <p class="text-[14px] text-gray-600 mb-4 font-google">
+                        Registro de actividades de monitoreo y optimización del algoritmo.<br>
+                        Esta información es visible el reporte contenido en: <a href="#" class="text-blue-600 underline">Reporte estado_implementacion</a>
+                    </p>
+                    <hr class="border-gray-200 mb-4">
+                    <div class="flex justify-between items-center text-sm text-gray-600">
+                        <div>
+                            <span class="font-medium text-gray-800">usuario@ejemplo.com</span> <a href="#" class="text-blue-600">Cambiar de cuenta</a>
+                            <div class="mt-1 flex items-center text-gray-500"><i class="fa-regular fa-eye-slash mr-2"></i> No compartido</div>
+                        </div>
+                        <div class="text-gray-500"><i class="fa-solid fa-cloud-arrow-up mr-1"></i> Borrador guardado</div>
+                    </div>
+                    <hr class="border-gray-200 my-4">
+                    <div class="text-red-600 text-sm">* Indica que la pregunta es obligatoria</div>
+                </div>
+
+                <!-- Contenedor dinámico para los campos del formulario -->
+                <div id="mock-fields-container" class="space-y-4">
+                    <!-- Se llena con JS -->
+                </div>
+
+                <!-- Botones simulados de envío -->
+                <div class="mt-6 flex justify-between items-center hidden" id="mock-submit-area">
+                    <button class="bg-brand-blue text-white px-6 py-2 rounded font-medium hover:bg-blue-800 transition-colors">Enviar</button>
+                    <button class="text-gray-500 font-medium hover:bg-gray-100 px-4 py-2 rounded transition-colors">Borrar formulario</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        const guideData = [
+            {
+                title: "Selección del Pozo",
+                icon: "fa-location-dot",
+                instructionHtml: `
+                    <p class="text-gray-600 mb-4 leading-relaxed">
+                        El primer paso es identificar sobre qué pozo se está realizando la intervención.
+                    </p>
+                    <div class="bg-blue-50 border-l-4 border-brand-blue p-4 rounded-r-md">
+                        <p class="text-brand-blue font-medium">
+                            <i class="fa-solid fa-hand-pointer mr-2"></i> Instrucción:
+                        </p>
+                        <p class="text-gray-700 mt-1">
+                            Seleccionar el nombre del pozo dentro del menú desplegable. Se abrirá un menú con los pozos existentes donde se deberá seleccionar el correspondiente (ej. CASE018H, CASE008D, etc).
+                        </p>
+                    </div>
+                `,
+                mockupHtml: `
+                    <div class="g-form-card active fade-in">
+                        <div class="mb-4 text-[16px] text-gray-800 font-google">Nombre del pozo <span class="text-red-600">*</span></div>
+                        <select class="g-select text-gray-700 cursor-pointer">
+                            <option value="">Elige</option>
+                            <option value="BN-0958">BN-0958</option>
+                            <option value="BN-0978">BN-0978</option>
+                            <option value="CASE008D">CASE008D</option>
+                            <option value="CASE018H" selected>CASE018H</option>
+                            <option value="CASE027">CASE027</option>
+                        </select>
+                    </div>
+                `,
+                showSubmit: false
+            },
+            {
+                title: "Tipo de Interacción",
+                icon: "fa-list-check",
+                instructionHtml: `
+                    <p class="text-gray-600 mb-4 leading-relaxed">
+                        Debe seleccionar qué tipo de actividad está reportando. Dependiendo de la acción realizada, elija una de las siguientes opciones:
+                    </p>
+                    <ul class="space-y-3 mt-4">
+                        <li class="bg-gray-50 p-3 rounded border border-gray-200">
+                            <strong class="text-gray-800 block mb-1">Actualización de aplicación</strong>
+                            <span class="text-sm text-gray-600">Cuando se implementa código o una aplicación con una nueva versión de Sensorless.</span>
+                        </li>
+                        <li class="bg-gray-50 p-3 rounded border border-gray-200">
+                            <strong class="text-gray-800 block mb-1">Puesta en marcha de algoritmo</strong>
+                            <span class="text-sm text-gray-600">Cuando se carga un modelo (.regt) para que Sensorless empiece a funcionar.</span>
+                        </li>
+                        <li class="bg-gray-50 p-3 rounded border border-gray-200">
+                            <strong class="text-gray-800 block mb-1">Arbol primer entrenamiento optimizado</strong>
+                            <span class="text-sm text-gray-600">Cuando se reemplaza el modelo existente por uno nuevo (.regt).</span>
+                        </li>
+                        <li class="bg-brand-light p-3 rounded border border-brand-blue/30 relative">
+                            <i class="fa-solid fa-check text-brand-blue absolute top-3 right-3 opacity-50"></i>
+                            <strong class="text-brand-blue block mb-1">Monitoreo</strong>
+                            <span class="text-sm text-gray-700">Cuando se esta haciendo una verificación de funcionamiento del sistema.</span>
+                        </li>
+                    </ul>
+                `,
+                mockupHtml: `
+                    <div class="g-form-card fade-in opacity-50 pointer-events-none hidden md:block">
+                        <div class="mb-4 text-[16px] text-gray-800 font-google">Nombre del pozo <span class="text-red-600">*</span></div>
+                        <div class="p-3 border rounded w-1/2 bg-gray-50 text-gray-500">CASE018H</div>
+                    </div>
+                    <div class="g-form-card active fade-in">
+                        <div class="mb-4 text-[16px] text-gray-800 font-google">Actividad reportada <span class="text-red-600">*</span></div>
+                        <select class="g-select text-gray-700 cursor-pointer w-full md:w-3/4">
+                            <option value="">Elige</option>
+                            <option value="app">Actualización de aplicación</option>
+                            <option value="start">Puesta en marcha de algoritmo</option>
+                            <option value="tree">Arbol primer entrenamiento optimizado</option>
+                            <option value="monitor" selected>Monitoreo</option>
+                        </select>
+                    </div>
+                `,
+                showSubmit: false
+            },
+            {
+                title: "Responsable del Reporte",
+                icon: "fa-user-pen",
+                instructionHtml: `
+                    <p class="text-gray-600 mb-4 leading-relaxed">
+                        Es fundamental registrar quién ejecuta la acción para seguimiento.
+                    </p>
+                    <div class="bg-blue-50 border-l-4 border-brand-blue p-4 rounded-r-md">
+                        <p class="text-gray-700">
+                            Existe un menú desplegable para indicar quien reporta la actividad. 
+                            <br><br>
+                            <strong>Objetivo:</strong> Poder consultar a la persona ejecutante cualquier duda o inquietud en caso de que durante la actividad se reporte información relevante sobre el estado de funcionamiento del algoritmo.
+                        </p>
+                    </div>
+                `,
+                mockupHtml: `
+                    <div class="g-form-card fade-in opacity-50 pointer-events-none hidden md:block">
+                        <div class="mb-4 text-[16px] text-gray-800 font-google">Actividad reportada <span class="text-red-600">*</span></div>
+                        <div class="p-3 border rounded w-1/2 bg-gray-50 text-gray-500">Monitoreo</div>
+                    </div>
+                    <div class="g-form-card active fade-in">
+                        <div class="mb-4 text-[16px] text-gray-800 font-google">Actividad reportada por <span class="text-red-600">*</span></div>
+                        <select class="g-select text-gray-700 cursor-pointer">
+                            <option value="">Elige</option>
+                            <option value="usuario1">Ingeniero A</option>
+                            <option value="usuario2">Operador B</option>
+                        </select>
+                    </div>
+                `,
+                showSubmit: false
+            },
+            {
+                title: "Registro de Mediciones",
+                icon: "fa-gauge-high",
+                instructionHtml: `
+                    <p class="text-gray-600 mb-4 leading-relaxed">
+                        Sección crucial para el análisis de datos. 
+                        <strong>Diligenciar las mediciones tomadas en la intervención (si se efectuaron).</strong>
+                    </p>
+                    <div class="bg-amber-50 border-l-4 border-amber-500 p-4 rounded-r-md mb-4 text-sm text-amber-800">
+                        <i class="fa-solid fa-triangle-exclamation mr-1"></i> <strong>Recomendación:</strong> No efectuar registros donde no hayan mediciones, a no ser que se trate de actualización de aplicación para implementación de algoritmo en una intervención posterior.
+                    </div>
+                    
+                    <p class="font-medium text-gray-800 mt-4 mb-2 border-b pb-2">Información Indispensable a registrar:</p>
+                    <ul class="list-disc pl-5 space-y-2 text-gray-600 text-sm">
+                        <li><strong>Sensorless:</strong> Todos los valores (PIP, PWF, Sumergencia, NFD).</li>
+                        <li><strong>Sensor de fondo:</strong> PIP (Si se cuenta con este y comunica correctamente).</li>
+                        <li><strong>Echometer:</strong> Datos si el ejecutante efectuó medición o si hay pruebas de producción de menos de 24h. Usar TVD para Sumergencia y NFD.</li>
+                    </ul>
+                `,
+                mockupHtml: `
+                    <!-- Título de Sección -->
+                    <div class="g-form-card fade-in" style="background-color: #143d78; color: white;">
+                        <h3 class="text-xl font-google">REGISTRO DE MEDICIONES</h3>
+                        <p class="text-sm mt-2 opacity-90">Diligenciar las mediciones tomadas en la intervención (si se efectuaron)...</p>
+                    </div>
+
+                    <!-- Sensor de fondo -->
+                    <div class="g-form-card fade-in">
+                        <h4 class="font-bold text-gray-800 mb-4 font-google text-lg border-b pb-2">Sensor de fondo</h4>
+                        <div class="mb-4">
+                            <label class="block text-[16px] text-gray-800 font-google mb-2">PIP [psi]</label>
+                            <input type="text" class="g-input" placeholder="Tu respuesta">
+                        </div>
+                    </div>
+
+                    <!-- Sensorless -->
+                    <div class="g-form-card active fade-in">
+                        <h4 class="font-bold text-gray-800 mb-4 font-google text-lg border-b pb-2">Sensorless</h4>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-[16px] text-gray-800 font-google mb-2">PIP SL [psi]</label>
+                                <input type="text" class="g-input" placeholder="Tu respuesta">
+                            </div>
+                            <div>
+                                <label class="block text-[16px] text-gray-800 font-google mb-2">PWF SL [psi]</label>
+                                <input type="text" class="g-input" placeholder="Tu respuesta">
+                            </div>
+                            <div>
+                                <label class="block text-[16px] text-gray-800 font-google mb-2">Sumergencia SL [ft]</label>
+                                <input type="text" class="g-input" placeholder="Tu respuesta">
+                            </div>
+                            <div>
+                                <label class="block text-[16px] text-gray-800 font-google mb-2">NFD SL [ft]</label>
+                                <input type="text" class="g-input" placeholder="Tu respuesta">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Echometer -->
+                    <div class="g-form-card fade-in">
+                        <div class="mb-2">
+                            <h4 class="font-bold text-gray-800 font-google text-lg">Echometer</h4>
+                            <p class="text-sm text-gray-500 mb-4 border-b pb-2">Mediciones de Sumergencia y NFD, usar TVD</p>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                             <div>
+                                <label class="block text-[16px] text-gray-800 font-google mb-2">PIP Echom [psi]</label>
+                                <input type="text" class="g-input" placeholder="Tu respuesta">
+                            </div>
+                            <div>
+                                <label class="block text-[16px] text-gray-800 font-google mb-2">PWF Echom [psi]</label>
+                                <input type="text" class="g-input" placeholder="Tu respuesta">
+                            </div>
+                        </div>
+                    </div>
+                `,
+                showSubmit: true
+            }
+        ];
+
+        let currentStep = 0;
+        const totalSteps = guideData.length;
+
+        const instructionContent = document.getElementById('instruction-content');
+        const mockFieldsContainer = document.getElementById('mock-fields-container');
+        const mockSubmitArea = document.getElementById('mock-submit-area');
+        const btnNext = document.getElementById('btn-next');
+        const btnPrev = document.getElementById('btn-prev');
+        const stepCounter = document.getElementById('step-counter');
+        const stepPercentage = document.getElementById('step-percentage');
+        const progressBar = document.getElementById('progress-bar');
+
+        function renderStep(stepIndex) {
+            const stepData = guideData[stepIndex];
+            
+            instructionContent.innerHTML = `
+                <h2 class="text-xl font-bold text-gray-800 mb-4 flex items-center">
+                    <div class="w-8 h-8 rounded-full bg-brand-light text-brand-blue flex items-center justify-center mr-3 text-sm">
+                        <i class="fa-solid ${stepData.icon}"></i>
+                    </div>
+                    ${stepData.title}
+                </h2>
+                ${stepData.instructionHtml}
+            `;
+            
+            instructionContent.classList.remove('fade-in');
+            void instructionContent.offsetWidth; 
+            instructionContent.classList.add('fade-in');
+
+            mockFieldsContainer.innerHTML = stepData.mockupHtml;
+            
+            if(stepData.showSubmit) {
+                mockSubmitArea.classList.remove('hidden');
+            } else {
+                mockSubmitArea.classList.add('hidden');
+            }
+
+            document.querySelector('.w-full.lg\\:w-2\\/3').scrollTo({ top: 0, behavior: 'smooth' });
+
+            btnPrev.disabled = stepIndex === 0;
+            
+            if (stepIndex === totalSteps - 1) {
+                btnNext.innerHTML = 'Finalizar <i class="fa-solid fa-check ml-2"></i>';
+                btnNext.classList.replace('bg-brand-blue', 'bg-green-600');
+                btnNext.classList.replace('hover:bg-blue-800', 'hover:bg-green-700');
+            } else {
+                btnNext.innerHTML = 'Siguiente <i class="fa-solid fa-arrow-right ml-2"></i>';
+                btnNext.classList.replace('bg-green-600', 'bg-brand-blue');
+                btnNext.classList.replace('hover:bg-green-700', 'hover:bg-blue-800');
+            }
+
+            const currentActual = stepIndex + 1;
+            stepCounter.textContent = `Paso ${currentActual} de ${totalSteps}`;
+            const percent = Math.round((currentActual / totalSteps) * 100);
+            stepPercentage.textContent = `${percent}%`;
+            progressBar.style.width = `${percent}%`;
+        }
+
+        btnNext.addEventListener('click', () => {
+            if (currentStep < totalSteps - 1) {
+                currentStep++;
+                renderStep(currentStep);
+            } else {
+                alert("¡Has completado la guía del formulario!");
+                currentStep = 0;
+                renderStep(currentStep);
+            }
+        });
+
+        btnPrev.addEventListener('click', () => {
+            if (currentStep > 0) {
+                currentStep--;
+                renderStep(currentStep);
+            }
+        });
+
+        renderStep(currentStep);
+
+    </script>
+</body>
+</html>
